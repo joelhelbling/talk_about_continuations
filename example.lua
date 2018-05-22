@@ -1,13 +1,13 @@
 function foo()
-	print("first foo")
-	coroutine.yield()
-	print("second foo")
+  print("first foo")
+  coroutine.yield()
+  print("second foo")
 end
 
 function bar()
-	print("first bar")
-	coroutine.yield()
-	print("second bar")
+  print("first bar")
+  coroutine.yield()
+  print("second bar")
 end
 
 cfoo = coroutine.create(foo)
