@@ -1,19 +1,19 @@
-function foo()
-  print("first foo")
+function muriel()
+  print("first Muriel (lua)")
   coroutine.yield()
-  print("second foo")
+  print("second Muriel (lua)")
 end
 
-function bar()
-  print("first bar")
+function rhonda()
+  print("first Rhonda (lua)")
   coroutine.yield()
-  print("second bar")
+  print("second Rhonda (lua)")
 end
 
-cfoo = coroutine.create(foo)
-cbar = coroutine.create(bar)
+co_muriel = coroutine.create(muriel)
+co_rhonda = coroutine.create(rhonda)
 
-coroutine.resume(cfoo)
-coroutine.resume(cbar)
-coroutine.resume(cfoo)
-coroutine.resume(cbar)
+coroutine.resume(co_muriel)
+coroutine.resume(co_rhonda)
+coroutine.resume(co_muriel)
+coroutine.resume(co_rhonda)

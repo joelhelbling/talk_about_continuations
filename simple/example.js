@@ -1,19 +1,19 @@
-function * foo() {
-  console.log("first foo")
+function * laurel() {
+  console.log("first Laurel (js)")
   yield
-  console.log("second foo")
+  console.log("second Laurel (js)")
 }
 
-function * bar() {
-  console.log("first bar")
+function * hardy() {
+  console.log("first Hardy (js)")
   yield
-  console.log("second bar")
+  console.log("second Hardy (js)")
 }
 
-const ifoo = foo()
-const ibar = bar()
+const itr_laurel = laurel()
+const itr_hardy = hardy()
 
-ifoo.next()
-ibar.next()
-ifoo.next()
-ibar.next()
+itr_laurel.next()
+itr_hardy.next()
+itr_laurel.next()
+itr_hardy.next()

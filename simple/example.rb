@@ -1,16 +1,16 @@
-foo = Fiber.new do
-  puts "first foo"
+hepburn = Fiber.new do
+  puts "first Hepburn (rb)"
   Fiber.yield
-  puts "second foo"
+  puts "second Hepburn (rb)"
 end
 
-bar = Fiber.new do
-  puts "first bar"
+bogart = Fiber.new do
+  puts "first Bogart (rb)"
   Fiber.yield
-  puts "second bar"
+  puts "second Bogart (rb)"
 end
 
-foo.resume
-bar.resume
-foo.resume
-bar.resume
+hepburn.resume
+bogart.resume
+hepburn.resume
+bogart.resume
