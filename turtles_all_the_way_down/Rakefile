@@ -1,0 +1,50 @@
+require 'dotenv/load'
+require 'oauth'
+
+desc 'get a Twitter access token/secret'
+task get_token: :no_token_present do
+  consumer = OAuth::Consumer.new \
+    @consumer_key, @consumer_secret,
+    site: 'https://api.twitter.com',
+    request_endpoint: 'https://api.twitter.com',
+    signin: true
+
+  request_token = consumer.get_request_token oauth_callback: "oob"
+
+  puts <<~EOF
+    Next, paste this link into your browser, log in and authorize this app:
+
+    https://api.twitter.com/oauth/authorize?oauth_token=#{request_token.token}
+
+  EOF
+
+  puts 'And afterwards, enter the PIN shown in the browser: '
+  verifier = STDIN.gets.chomp
+
+  access_token = request_token.get_access_token(:oauth_verifier => verifier)
+
+  puts <<~EOF
+    Finally, add the following to your .env file:
+    ---
+    ACCESS_TOKEN=#{access_token.token}
+    ACCESS_TOKEN_SECRET=#{access_token.secret}
+    ---
+  EOF
+end
+
+task no_token_present: :environment do
+  if ENV['ACCESS_TOKEN']
+    raise <<~EOF
+      You already have a token!
+      If you really need to create a new token, first remove
+      ACCESS_TOKEN and ACCESS_TOKEN_SECRET from the .env file.
+    EOF
+  end
+end
+
+task :environment do
+  @consumer_key = ENV['CONSUMER_KEY']
+  @consumer_secret = ENV['CONSUMER_SECRET']
+  @access_token = ENV['ACCESS_TOKEN']
+  @access_token_secret = ENV['ACCESS_TOKEN_SECRET']
+end
